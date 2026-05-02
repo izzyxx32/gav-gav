@@ -9,6 +9,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SafeScreen, VStack } from '../src/components/layout';
@@ -27,6 +28,7 @@ function formatCountdown(seconds: number) {
 
 export default function VerifyEmailScreen() {
   const router = useRouter();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ email?: string }>();
   const inputRef = useRef<TextInput>(null);
@@ -80,7 +82,18 @@ export default function VerifyEmailScreen() {
   }, []);
 
   function handleCodeChange(value: string) {
-    setCode(value.replace(/\D/g, '').slice(0, CODE_LENGTH));
+    const nextCode = value.replace(/\D/g, '').slice(0, CODE_LENGTH);
+    setCode(nextCode);
+
+    if (nextCode === FAKE_CODE) {
+      Keyboard.dismiss();
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'my-pets' }],
+        })
+      );
+    }
   }
 
   function handleResend() {
