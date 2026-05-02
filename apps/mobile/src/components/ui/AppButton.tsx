@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, type PressableProps } from 'react-native';
+import { Pressable, StyleSheet, type PressableProps, type TextStyle } from 'react-native';
 
 import { colors, radius, spacing, typography } from '../../constants';
 import { AppText } from './AppText';
@@ -8,6 +8,8 @@ export type AppButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type AppButtonProps = PressableProps & {
   fullWidth?: boolean;
   label: string;
+  labelColor?: string;
+  labelStyle?: TextStyle;
   variant?: AppButtonVariant;
 };
 
@@ -15,6 +17,8 @@ export function AppButton({
   disabled,
   fullWidth,
   label,
+  labelColor,
+  labelStyle,
   style,
   variant = 'primary',
   ...props
@@ -34,8 +38,8 @@ export function AppButton({
       {...props}>
       <AppText
         variant="button"
-        color={variant === 'primary' ? colors.primaryText : colors.textPrimary}
-        style={styles.label}>
+        color={labelColor ?? (variant === 'primary' ? colors.primaryText : colors.textPrimary)}
+        style={[styles.label, labelStyle]}>
         {label}
       </AppText>
     </Pressable>

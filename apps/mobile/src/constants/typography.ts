@@ -1,4 +1,14 @@
 export const typography = {
+  brand: {
+    fontSize: 132,
+    lineHeight: 108,
+    fontWeight: '700',
+  },
+  onboardingCaption: {
+    fontSize: 16,
+    lineHeight: 16,
+    fontWeight: '400',
+  },
   title: {
     fontSize: 28,
     lineHeight: 34,
