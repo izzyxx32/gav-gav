@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
 import { colors, radius, spacing, typography } from '../../constants';
@@ -6,15 +7,19 @@ export type AppTextInputProps = TextInputProps & {
   hasError?: boolean;
 };
 
-export function AppTextInput({ hasError, placeholderTextColor, style, ...props }: AppTextInputProps) {
+export const AppTextInput = forwardRef<TextInput, AppTextInputProps>(function AppTextInput(
+  { hasError, placeholderTextColor, style, ...props },
+  ref
+) {
   return (
     <TextInput
+      ref={ref}
       placeholderTextColor={placeholderTextColor ?? colors.textMuted}
       style={[styles.input, hasError && styles.error, style]}
       {...props}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   input: {

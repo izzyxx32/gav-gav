@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { Screen, VStack } from '../src/components/layout';
@@ -10,6 +11,8 @@ const dogEarCut = require('../src/assets/images/dog-ear-cut.png');
 const welcomeDog = require('../src/assets/images/welcome-dog.png');
 
 export default function IndexScreen() {
+  const router = useRouter();
+
   return (
     <Screen style={styles.screen} contentStyle={styles.content}>
       <View style={styles.heroArea}>
@@ -35,6 +38,7 @@ export default function IndexScreen() {
           <AppButton
             fullWidth
             label="Зарегистрироваться"
+            onPress={() => router.push('/register')}
             style={styles.primaryButton}
             labelStyle={styles.buttonLabel}
           />

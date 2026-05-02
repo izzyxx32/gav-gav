@@ -1,13 +1,22 @@
-import { Pressable, StyleSheet, type PressableProps } from 'react-native';
+import { Pressable, StyleSheet, type PressableProps, type TextStyle } from 'react-native';
 
 import { colors, radius, spacing } from '../../constants';
 import { AppText } from './AppText';
 
 export type AppIconButtonProps = PressableProps & {
   iconLabel: string;
+  labelColor?: string;
+  labelStyle?: TextStyle;
 };
 
-export function AppIconButton({ disabled, iconLabel, style, ...props }: AppIconButtonProps) {
+export function AppIconButton({
+  disabled,
+  iconLabel,
+  labelColor,
+  labelStyle,
+  style,
+  ...props
+}: AppIconButtonProps) {
   return (
     <Pressable
       accessibilityLabel={props.accessibilityLabel ?? iconLabel}
@@ -20,7 +29,7 @@ export function AppIconButton({ disabled, iconLabel, style, ...props }: AppIconB
         typeof style === 'function' ? style(state) : style,
       ]}
       {...props}>
-      <AppText variant="bodyStrong" align="center">
+      <AppText variant="bodyStrong" align="center" color={labelColor} style={labelStyle}>
         {iconLabel}
       </AppText>
     </Pressable>
